@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NOTAM Request Generator - Create AFTN-formatted NOTAM request messages">
+    <meta name="keywords" content="NOTAM, AFTN, aviation, flight planning, request generator">
+    <title>NOTAMer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NOTAM Request Generator</h1>
+            <p>Generate AFTN-formatted NOTAM Request Messages</p>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2>Request Details</h2>
+                
+                <div class="info-box">
+                    <h3>AFTN NOTAM Request Format</h3>
+                    <p>This tool generates RQN (Request NOTAM) messages in standard AFTN format for requesting NOTAMs from aviation authorities.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="priority">Message Priority:</label>
+                    <select id="priority">
+                        <option value="GG">GG - General (Normal)</option>
+                        <option value="FF">FF - Flight Safety</option>
+                        <option value="DD">DD - Distress</option>
+                        <option value="SS">SS - Safety</option>
+                    </select>
+                    <div class="field-help">Priority indicator for AFTN message</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="origin">Origin Address (8 letters):</label>
+                    <input type="text" id="origin" placeholder="e.g., EGGWYFYX" maxlength="8">
+                    <div class="field-help">Your AFTN address (ICAO code + department code)</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Destination Address (8 letters):</label>
+                    <input type="text" id="destination" placeholder="e.g., EGGGYNYX" maxlength="8">
+                    <div class="field-help">Target NOTAM office AFTN address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location Identifier:</label>
+                    <input type="text" id="location" placeholder="e.g., EGLL, KJFK" maxlength="4">
+                    <div class="field-help">4-letter ICAO airport/FIR code</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="requestType">Request Type:</label>
+                    <select id="requestType">
+                        <option value="ALL">ALL - All current NOTAMs</option>
+                        <option value="NEW">NEW - New NOTAMs since last request</option>
+                        <option value="ACTIVE">ACTIVE - Currently active NOTAMs</option>
+                        <option value="CANCELLED">CANCELLED - Recently cancelled NOTAMs</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeFrom">Valid From (UTC):</label>
+                    <input type="datetime-local" id="timeFrom">
+                    <div class="field-help">Start time for NOTAM validity period</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeTo">Valid To (UTC):</label>
+                    <input type="datetime-local" id="timeTo">
+                    <div class="field-help">End time for NOTAM validity period</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="remarks">Additional Remarks:</label>
+                    <textarea id="remarks" rows="3" placeholder="Optional additional information or specific requirements"></textarea>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2>Generated AFTN Message</h2>
+                <textarea id="output" readonly placeholder="Your formatted NOTAM request will appear here..."></textarea>
+                
+                <div class="button-group">
+                    <button class="btn-primary" onclick="generateMessage()">Generate Request</button>
+                    <button class="btn-secondary" onclick="copyToClipboard()">Copy Message</button>
+                    <button class="btn-success" onclick="sendEmail()">Send via Email</button>
+                    <button class="btn-secondary" onclick="clearForm()">Clear Form</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 NOTAM Request Generator. For aviation professional use.</p>
+            <p>Always verify message format with your local aviation authority before transmission.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

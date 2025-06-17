@@ -1,11 +1,13 @@
 // NOTAM Request Generator JavaScript
 
-// Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
-    setDefaultTimes();
-    setupEventListeners();
-    loadSavedData();
-});
+// Initialize the application (only when running in a browser)
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setDefaultTimes();
+        setupEventListeners();
+        loadSavedData();
+    });
+}
 
 // Set current date/time as default
 function setDefaultTimes() {
@@ -58,7 +60,12 @@ function debounce(func, wait) {
 function formatDateTime(dateTimeStr) {
     if (!dateTimeStr) return '';
     const date = new Date(dateTimeStr);
-    return date.toISOString().replace(/[-:]/g, '').slice(0, 12);
+    const year = date.getUTCFullYear().toString().padStart(4, '0');
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+    return `${year}${month}${day}${hours}${minutes}`;
 }
 
 // Generate AFTN message
@@ -146,7 +153,7 @@ function validateForm(data) {
 function buildAFTNMessage(data) {
     // Generate timestamp
     const now = new Date();
-    const timestamp = now.toISOString().replace(/[-:]/g, '').slice(0, 12);
+    const timestamp = formatDateTime(now.toISOString());
     
     // Generate message number (using timestamp for uniqueness)
     const msgNumber = timestamp.slice(-4);

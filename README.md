@@ -28,3 +28,14 @@ B)202506171400 C)202506181400
 D)ALL NOTAMS REQUESTED
 E)Additional remarks if any
 )
+```
+
+## Usage
+
+To run the application locally using Docker:
+
+```bash
+docker-compose up --build
+```
+
+Then open [http://localhost:8080](http://localhost:8080) in your browser.

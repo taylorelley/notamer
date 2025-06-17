@@ -1,0 +1,16 @@
+{
+  "name": "notamer",
+  "version": "1.0.0",
+  "description": "A web application for generating AFTN-formatted NOTAM (Notice to Airmen) request messages. This tool helps aviation professionals create properly formatted RQN (Request NOTAM) messages according to ICAO standards.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.0.0"
+  }
+}

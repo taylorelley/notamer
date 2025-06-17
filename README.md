@@ -39,5 +39,14 @@ To run the application locally using Docker:
 docker-compose up --build
 ```
 
+## Development
+
+Install dependencies and run tests with:
+
+```bash
+npm install
+npm test
+```
+
 Then open [http://localhost:8080](http://localhost:8080) in your browser.
 Access the administration panel at [http://localhost:8080/admin](http://localhost:8080/admin) to set default values.

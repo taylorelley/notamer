@@ -12,6 +12,7 @@ A web application for generating AFTN-formatted NOTAM (Notice to Airmen) request
 - **Data Persistence**: Automatically saves form data locally
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
 - **Docker Ready**: Complete containerization for easy deployment
+- **Admin Panel**: Configure default values for all fields at `/admin`
 
 ## AFTN Message Format
 
@@ -39,3 +40,4 @@ docker-compose up --build
 ```
 
 Then open [http://localhost:8080](http://localhost:8080) in your browser.
+Access the administration panel at [http://localhost:8080/admin](http://localhost:8080/admin) to set default values.

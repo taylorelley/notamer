@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTAMer Admin</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Administration Panel</h1>
+            <p>Configure default values for NOTAM request fields</p>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2>Default Settings</h2>
+
+                <div class="form-group">
+                    <label for="priority">Message Priority:</label>
+                    <select id="priority">
+                        <option value="GG">GG - General (Normal)</option>
+                        <option value="FF">FF - Flight Safety</option>
+                        <option value="DD">DD - Distress</option>
+                        <option value="SS">SS - Safety</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="origin">Origin Address (8 letters):</label>
+                    <input type="text" id="origin" maxlength="8" placeholder="e.g., EGGWYFYX">
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Destination Address (8 letters):</label>
+                    <input type="text" id="destination" maxlength="8" placeholder="e.g., EGGGYNYX">
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location Identifier:</label>
+                    <input type="text" id="location" maxlength="4" placeholder="e.g., EGLL">
+                </div>
+
+                <div class="form-group">
+                    <label for="requestType">Request Type:</label>
+                    <select id="requestType">
+                        <option value="ALL">ALL - All current NOTAMs</option>
+                        <option value="NEW">NEW - New NOTAMs since last request</option>
+                        <option value="ACTIVE">ACTIVE - Currently active NOTAMs</option>
+                        <option value="CANCELLED">CANCELLED - Recently cancelled NOTAMs</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeFrom">Valid From (UTC):</label>
+                    <input type="datetime-local" id="timeFrom">
+                </div>
+
+                <div class="form-group">
+                    <label for="timeTo">Valid To (UTC):</label>
+                    <input type="datetime-local" id="timeTo">
+                </div>
+
+                <div class="form-group">
+                    <label for="remarks">Additional Remarks:</label>
+                    <textarea id="remarks" rows="3" placeholder="Optional remarks"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="saveDefaults()">Save Defaults</button>
+                    <button class="btn-secondary" onclick="clearDefaults()">Clear Defaults</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

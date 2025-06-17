@@ -3,6 +3,7 @@
 // Initialize the application (only when running in a browser)
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', function() {
+        loadDefaultSettings();
         setDefaultTimes();
         setupEventListeners();
         loadSavedData();
@@ -13,11 +14,17 @@ if (typeof document !== 'undefined') {
 function setDefaultTimes() {
     const now = new Date();
     const nowStr = now.toISOString().slice(0, 16);
-    document.getElementById('timeFrom').value = nowStr;
-    
+    const timeFromEl = document.getElementById('timeFrom');
+    if (!timeFromEl.value) {
+        timeFromEl.value = nowStr;
+    }
+
     const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     const tomorrowStr = tomorrow.toISOString().slice(0, 16);
-    document.getElementById('timeTo').value = tomorrowStr;
+    const timeToEl = document.getElementById('timeTo');
+    if (!timeToEl.value) {
+        timeToEl.value = tomorrowStr;
+    }
 }
 
 // Setup event listeners
@@ -248,6 +255,7 @@ function clearForm() {
     });
     
     document.getElementById('output').value = '';
+    loadDefaultSettings();
     setDefaultTimes();
     clearSavedData();
     showNotification('Form cleared', 'info');
@@ -291,6 +299,26 @@ function saveFormData() {
     }
 }
 
+// Load admin-defined default settings
+function loadDefaultSettings() {
+    if (typeof(Storage) !== "undefined") {
+        const defaults = localStorage.getItem('notamDefaultSettings');
+        if (defaults) {
+            try {
+                const data = JSON.parse(defaults);
+                Object.keys(data).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element && data[key]) {
+                        element.value = data[key];
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading default settings:', error);
+            }
+        }
+    }
+}
+
 // Load saved form data
 function loadSavedData() {
     if (typeof(Storage) !== "undefined") {
@@ -330,6 +358,7 @@ if (typeof module !== 'undefined' && module.exports) {
         formatDateTime,
         validateForm,
         buildAFTNMessage,
-        getFormData
+        getFormData,
+        loadDefaultSettings
     };
 }

@@ -1,0 +1,14 @@
+services:
+  notam-request-app:
+    build: .
+    container_name: notam-request-generator
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.notam-app.rule=Host(`localhost`)"
+      - "traefik.http.services.notam-app.loadbalancer.server.port=80"

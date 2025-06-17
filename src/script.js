@@ -4,6 +4,7 @@
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', function() {
         setDefaultTimes();
+        loadDefaultSettings();
         setupEventListeners();
         loadSavedData();
     });
@@ -291,6 +292,26 @@ function saveFormData() {
     }
 }
 
+// Load admin-defined default settings
+function loadDefaultSettings() {
+    if (typeof(Storage) !== "undefined") {
+        const defaults = localStorage.getItem('notamDefaultSettings');
+        if (defaults) {
+            try {
+                const data = JSON.parse(defaults);
+                Object.keys(data).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element && data[key]) {
+                        element.value = data[key];
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading default settings:', error);
+            }
+        }
+    }
+}
+
 // Load saved form data
 function loadSavedData() {
     if (typeof(Storage) !== "undefined") {
@@ -330,6 +351,7 @@ if (typeof module !== 'undefined' && module.exports) {
         formatDateTime,
         validateForm,
         buildAFTNMessage,
-        getFormData
+        getFormData,
+        loadDefaultSettings
     };
 }

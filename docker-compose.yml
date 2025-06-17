@@ -3,7 +3,7 @@ services:
     build: .
     container_name: notam-request-generator
     ports:
-      - "8998:80"
+      - "9009:80"
     restart: unless-stopped
     environment:
       - NGINX_HOST=localhost

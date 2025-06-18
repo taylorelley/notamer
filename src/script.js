@@ -301,22 +301,30 @@ function saveFormData() {
 
 // Load admin-defined default settings
 function loadDefaultSettings() {
-    if (typeof(Storage) !== "undefined") {
+    let data = {};
+
+    if (typeof globalThis !== 'undefined' && globalThis.notamGlobalDefaults) {
+        data = globalThis.notamGlobalDefaults;
+    } else if (typeof(Storage) !== "undefined") {
         const defaults = localStorage.getItem('notamDefaultSettings');
         if (defaults) {
             try {
-                const data = JSON.parse(defaults);
-                Object.keys(data).forEach(key => {
-                    const element = document.getElementById(key);
-                    if (element && data[key]) {
-                        element.value = data[key];
-                    }
-                });
+                data = JSON.parse(defaults);
+                if (typeof globalThis !== 'undefined') {
+                    globalThis.notamGlobalDefaults = data;
+                }
             } catch (error) {
                 console.error('Error loading default settings:', error);
             }
         }
     }
+
+    Object.keys(data).forEach(key => {
+        const element = document.getElementById(key);
+        if (element && data[key]) {
+            element.value = data[key];
+        }
+    });
 }
 
 // Load saved form data

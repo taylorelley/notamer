@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadAdminDefaults() {
     const defaults = getStoredDefaults();
+    // Expose defaults globally so other pages can access them
+    if (typeof globalThis !== 'undefined') {
+        globalThis.notamGlobalDefaults = defaults;
+    }
     Object.keys(defaults).forEach(key => {
         const el = document.getElementById(key);
         if (el && defaults[key]) {
@@ -17,11 +21,17 @@ function loadAdminDefaults() {
 function saveDefaults() {
     const data = collectFormData();
     localStorage.setItem('notamDefaultSettings', JSON.stringify(data));
+    if (typeof globalThis !== 'undefined') {
+        globalThis.notamGlobalDefaults = data;
+    }
     showNotification('Defaults saved successfully!', 'success');
 }
 
 function clearDefaults() {
     localStorage.removeItem('notamDefaultSettings');
+    if (typeof globalThis !== 'undefined') {
+        globalThis.notamGlobalDefaults = {};
+    }
     const elements = document.querySelectorAll('input, select, textarea');
     elements.forEach(el => {
         if (el.type === 'select-one') {

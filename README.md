@@ -12,7 +12,8 @@ A web application for generating AFTN-formatted NOTAM (Notice to Airmen) request
 - **Data Persistence**: Automatically saves form data locally
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
 - **Docker Ready**: Complete containerization for easy deployment
-- **Admin Panel**: Configure default values for all fields at `/admin`
+- **Admin Panel**: Configure default values for all fields at `/admin`. These
+  settings are stored as global defaults and loaded whenever the form is opened.
 
 ## AFTN Message Format
 
